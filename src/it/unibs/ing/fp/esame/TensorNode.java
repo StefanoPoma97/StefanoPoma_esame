@@ -1,7 +1,13 @@
 package it.unibs.ing.fp.esame;
 
 import java.util.ArrayList;
-
+/**
+ * classe TensorNode
+ * @author Stefano
+ *nodo costituito da più tensor, matrici, e altri nodi figli
+ *a seconda che sia un nodo radice o meno permette di calcolare il massimo tra gli indici dei Tensor e nodi figli o il minimo
+ *la classe è concepita di modo che da lettura da Xml risulti un unico nodo radice con connessi ad esso altri nodi figli o direttamente dei Tensor o Matrici libere
+ */
 public class TensorNode {
 	private String id;
 	private ArrayList<Tensor> tensori = new ArrayList<>();
@@ -9,6 +15,26 @@ public class TensorNode {
 	private ArrayList<Matrice> matrici= new ArrayList<>();
 	private boolean root=false;
 	
+	/**
+	 * ritorna il numero di nodi connessi al nodo seguente
+	 * @return numero di nodi connessi al seguente TensorNode
+	 */
+	public int numNodi()
+	{
+		return nodi.size();
+	}
+/**
+ * stampa tutti i nodi connessi al TensorNode e per ognuno di essi indica il suo TensorUnit, ovvero l'indice massimo tra quello dei Tensor ad esso connessi
+ */
+	public void print()
+	{
+		System.out.println("numero di nodi connessi al nodo radice :"+nodi.size());
+		for (int i=0; i<nodi.size(); i++)
+		{
+			System.out.println("nodo numero: "+ i);
+			System.out.println("tensorunit del nodo: "+nodi.get(i).tensorUnit());
+		}
+	}
 	/**
 	 * 
 	 * @param _id id Stringa
@@ -19,7 +45,7 @@ public class TensorNode {
 	}
 	/**
 	 * 
-	 * @return array di Tensor
+	 * @return array di Tensor connessi al nodo
 	 */
 	public ArrayList<Tensor> getTensori ()
 	{
@@ -33,7 +59,14 @@ public class TensorNode {
 		root=true;
 	}
 	/**
-	 * 
+	 * setta se il nodo non è la radice
+	 */
+	public void setRootFalse()
+	{
+		root=true;
+	}
+	/**
+	 * aggiunge una matrice connessa a questo nodo
 	 * @param a Matrice
 	 */
 	public void addMatrice (Matrice a)
@@ -41,7 +74,7 @@ public class TensorNode {
 		matrici.add(a);
 	}
 	/**
-	 * 
+	 * Aggiunge un tensor connesso a questo nodo
 	 * @param a Tensor
 	 */
 	public void addTensor(Tensor a)
@@ -49,7 +82,7 @@ public class TensorNode {
 		tensori.add(a);
 	}
 	/**
-	 * 
+	 * aggiunge l'Arraylist di Tensor connessi a questo nodo
 	 * @param a ArrayList di Tensor
 	 */
 	public void addTensori(ArrayList<Tensor>a)
@@ -57,7 +90,7 @@ public class TensorNode {
 		tensori=new ArrayList<>(a);
 	}
 	/**
-	 * 
+	 * aggiunge un nodo connesso a questo nodo
 	 * @param a TensorNode
 	 */
 	public void addNode(TensorNode a)
@@ -65,7 +98,7 @@ public class TensorNode {
 		nodi.add(a);
 	}
 	/**
-	 * 
+	 * aggiunge un ArrayList di TensorNode connessi a questo nodo
 	 * @param a ArrayList di TensorNode
 	 */
 	public void addNodi(ArrayList<TensorNode>a)
@@ -178,7 +211,7 @@ public class TensorNode {
 		{
 			valori.add(minTensori());
 		}
-		int min=0;
+		int min=valori.get(0);
 		if (valori.size()==0)
 			System.out.println("nodo vuoto");
 		else

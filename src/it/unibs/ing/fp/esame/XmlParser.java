@@ -18,6 +18,13 @@ import javax.xml.stream.XMLStreamReader;
 public class XmlParser {
 
 	File filename;
+	/**
+	 * permette la lettura da xml e la creazione di un array li tensorNode
+	 * @param filename file di input
+	 * @return ArrayList di TensorNode
+	 * @throws FileNotFoundException
+	 * @throws XMLStreamException
+	 */
 	public ArrayList<TensorNode> parseXml(String filename) throws FileNotFoundException, XMLStreamException {
 
 		ArrayList<TensorNode> output = new ArrayList<>();
@@ -33,8 +40,6 @@ public class XmlParser {
 		TensorNode tmp=new TensorNode();
 		boolean root=true;
 		boolean primaRigaMatrice=true;
-		boolean nodoPadre=false;
-		boolean nodoFiglio=false;
 		int cont=0;
 		boolean e =false;
 		int x=0;
@@ -65,11 +70,6 @@ public class XmlParser {
 										break;
 									case "TensorNode":
 										open++;
-										if (nodoPadre==true)
-											nodoFiglio=true;
-										if (open>1)
-											nodoPadre=true;
-										cont=0;
 										tmp=new TensorNode();
 										
 										break;
@@ -146,29 +146,30 @@ public class XmlParser {
 										break;
 									case "label":
 										tmp.setId(label);
-										System.out.println("inizio nodo"+label);
-										if (label.equalsIgnoreCase("E"))
-											e=true;
+//										System.out.println("inizio nodo"+label);
+//										if (label.equalsIgnoreCase("G"))
+//											e=true;
 										break;
 									case "matrix":
 										matrici.add(new Matrice(matrice));
 										break;
 									case "tensor":
 										cont++;
-										if (cont==15 && e==true)
-											System.out.println("quasi");
+//										if (cont==15 && e==true)
+//											System.out.println("quasi");
 											
-										System.out.println("sto per aggiunger tensor numero: "+cont);
+//										System.out.println("sto per aggiunger tensor numero: "+cont);
 										tensori.add(new Tensor(matrici));
 										matrici=new ArrayList<>();
 										break;
 										
 									case "TensorNode":
 										open--;
-										if (open==0)
-											nodoPadre=false;
-										if (open ==1)
+										if (tensori.size()==0)
+											tmp=new TensorNode();
+										if (open ==0)
 										{
+											
 											tmp.addNodi(nodiAdd);
 											nodiAdd=new ArrayList<>();
 											output.add(tmp);
@@ -184,6 +185,7 @@ public class XmlParser {
 											tensori=new ArrayList<>();
 										}
 										
+										cont=0;
 										
 										break;
 									}

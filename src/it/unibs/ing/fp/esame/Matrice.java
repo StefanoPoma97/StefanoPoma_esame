@@ -1,5 +1,9 @@
 package it.unibs.ing.fp.esame;
-
+/**
+ * classe matrice
+ * @author Stefano
+ *crea una matrice di interi e permette di calcolarne il determinante mediante il metodo di LaPlace
+ */
 public class Matrice {
 	private int tempoSarrus;
 	private int tempoLaPlace;
@@ -12,7 +16,7 @@ public class Matrice {
 	
 	
 	/**
-	 * costruttore che riceve matrice, inizializza la matrice presente come variabile privata e inizializza lunghezza
+	 * costruttore che riceve matrice, inizializza la matrice presente con quella ricevuta e inizializza la sua diemnsione
 	 * @param _matrice matrice passata al construttore
 	 */
 	public Matrice (int _matrice [][])
@@ -47,6 +51,9 @@ public class Matrice {
 	
 	/**
 	 * calcola il determinanante della matrice appoggiandosi al metodo privato LaPlace()
+	 * il metodo considera come migliore riga qualla in posizione 0
+	 * TO DO selezionare la migliore riga o colonna in base al numero di 0 che sono presenti
+	 * TO DO implementare Sarrus
 	 * @return determinante
 	 */
 	public int determinante()
@@ -59,7 +66,6 @@ public class Matrice {
 	private int laPlace()
 	{
 		int determinanante= calcoloLaPlace(matrice, dimensione);
-		System.out.println("passo matrice di dim"+dimensione);
 		return determinanante;
 		
 	}
@@ -67,10 +73,11 @@ public class Matrice {
 	private int calcoloLaPlace(int mat[][], int dim)
 	{
 		
+		if (dim==1)
+			return mat[0][0];
 		
 		if (dim==2)
 		{
-			System.out.println("la dimensione è 2");
 			int risultato= (mat[0][0]*mat[1][1])-(mat[0][1]*mat[1][0]);
 			return risultato;
 		}
