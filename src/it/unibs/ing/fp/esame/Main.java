@@ -43,9 +43,10 @@ public class Main {
 			e.printStackTrace();
 		}
 		System.out.println("ci sono: "+elenco.get(0).numNodi()+" TensorNode connessi al nodo radice");
+		//il massimo viene caricato correttamente il minimo deve essere corretto
 		for (TensorNode a : elenco)
 		{
-			a.setRoot();
+//			a.setRoot();
 			System.out.println(a.tensorUnit());
 			a.print();
 		}
