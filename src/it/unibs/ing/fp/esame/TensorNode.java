@@ -9,6 +9,11 @@ public class TensorNode {
 	private ArrayList<Matrice> matrici= new ArrayList<>();
 	private boolean root=false;
 	
+	public void setId(String _id)
+	{
+		id=_id;
+	}
+	
 	public ArrayList<Tensor> getTensori ()
 	{
 		return tensori;
@@ -26,9 +31,17 @@ public class TensorNode {
 	{
 		tensori.add(a);
 	}
+	public void addTensori(ArrayList<Tensor>a)
+	{
+		tensori=new ArrayList<>(a);
+	}
 	public void addNode(TensorNode a)
 	{
 		nodi.add(a);
+	}
+	public void addNodi(ArrayList<TensorNode>a)
+	{
+		nodi=new ArrayList<>(a);
 	}
 	
 	private int maxTensori()

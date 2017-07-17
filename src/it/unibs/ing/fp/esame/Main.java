@@ -1,6 +1,9 @@
 package it.unibs.ing.fp.esame;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
+import javax.xml.stream.XMLStreamException;
 
 public class Main {
 
@@ -32,6 +35,14 @@ public class Main {
 		m.printMatrice();
 		m.dimensione();
 		System.out.println(m.determinante());
+		
+		ArrayList<TensorNode> elenco= new ArrayList<>();
+		XmlParser xp = new XmlParser();
+		try {
+			elenco = xp.parseXml("input_0.xml");
+		} catch (FileNotFoundException | XMLStreamException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
