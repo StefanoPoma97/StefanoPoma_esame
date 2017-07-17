@@ -38,10 +38,21 @@ public class Matrice {
 		}
 	}
 	
-	public int laPlace()
+	public int determinante()
 	{
-//		int matriceCalcolo [][]=matrice;
-//		int dim=matriceCalcolo.length;
+		if (dimensione<=0)
+		{
+			return 0;
+		}
+			
+		else
+		{
+			detLaPlace=laPlace();
+			return detLaPlace;
+		}
+	}
+	private int laPlace()
+	{
 		int determinanante= calcoloLaPlace(matrice, dimensione);
 		System.out.println("passo matrice di dim"+dimensione);
 		return determinanante;
