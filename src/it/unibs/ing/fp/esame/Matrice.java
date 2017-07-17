@@ -58,9 +58,19 @@ public class Matrice {
 	 */
 	public int determinante()
 	{
-		
+//		if (dimensione<=3)
+//		{
+//			detSarrus=sarrus();
+//			return detSarrus;
+//			
+//		}
+//		else
+//		{
 			detLaPlace=laPlace();
-			return detLaPlace;
+			return detLaPlace;	
+//		}
+		
+			
 		
 	}
 	private int laPlace()
@@ -69,7 +79,48 @@ public class Matrice {
 		return determinanante;
 		
 	}
-	
+	private int sarrus()
+	{
+		int output=0;
+		if (dimensione==2)
+		{
+			output=((matrice[0][0]*matrice[1][1])-(matrice[0][1]*matrice[1][0]));
+		}
+		if (dimensione==1)
+		{
+			 output= matrice[0][0];
+		}
+		if (dimensione==3)
+		{
+			
+			int positivo=0;
+			int x=0;
+			int y=1;
+			int z=2;
+			positivo =positivo+(matrice[0][x]*matrice[1][y]*matrice[2][z]);
+			positivo= positivo+(matrice[0][avanza(x)]*matrice[1][avanza(y)]*matrice[2][avanza(z)]);
+			positivo= positivo+(matrice[0][avanza(x+1)]*matrice[1][avanza(y+1)]*matrice[2][avanza(0)]);
+			int negativo=0;
+			int x1=2;
+			int y1=1;
+			int z1=0;
+			negativo=negativo+(matrice[0][x1]*matrice[0][y1]*matrice[0][z1]);
+			negativo=negativo+(matrice[0][avanza(x1)]*matrice[0][avanza(y1)]*matrice[0][avanza(z1)]);
+			negativo=negativo+(matrice[0][1]*matrice[0][0]*matrice[0][2]);
+			
+			output= positivo-negativo;
+		}
+		return output;
+		
+		
+	}
+	private int avanza(int x)
+	{
+		x++;
+		if (x==dimensione)
+			x=0;
+		return x;
+	}
 	private int calcoloLaPlace(int mat[][], int dim)
 	{
 		
