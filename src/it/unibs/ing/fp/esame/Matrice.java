@@ -58,17 +58,17 @@ public class Matrice {
 	 */
 	public int determinante()
 	{
-//		if (dimensione<=3)
-//		{
-//			detSarrus=sarrus();
-//			return detSarrus;
-//			
-//		}
-//		else
-//		{
+		if (dimensione<=3)
+		{
+			detSarrus=sarrus();
+			return detSarrus;
+			
+		}
+		else
+		{
 			detLaPlace=laPlace();
 			return detLaPlace;	
-//		}
+		}
 		
 			
 		
