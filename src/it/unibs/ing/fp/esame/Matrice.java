@@ -10,21 +10,28 @@ public class Matrice {
 	private int matrice [][];
 	private int out =0;
 	
+	
+	/**
+	 * costruttore che riceve matrice, inizializza la matrice presente come variabile privata e inizializza lunghezza
+	 * @param _matrice matrice passata al construttore
+	 */
 	public Matrice (int _matrice [][])
 	{
 		matrice = _matrice;
 		dimensione=matrice.length;
 	}
 	
-	public void addMatrice (int _matrice [][])
-	{
-		matrice = _matrice;
-		dimensione=matrice.length;
-	}
+/**
+ * stampa la dimensione della matrice
+ */
 	public void dimensione()
 	{
 		System.out.println(dimensione);
 	}
+	
+	/**
+	 * stampa la matrice 
+	 */
 	public void printMatrice ()
 	{
 		
@@ -38,18 +45,16 @@ public class Matrice {
 		}
 	}
 	
+	/**
+	 * calcola il determinanante della matrice appoggiandosi al metodo privato LaPlace()
+	 * @return determinante
+	 */
 	public int determinante()
 	{
-		if (dimensione<=0)
-		{
-			return 0;
-		}
-			
-		else
-		{
+		
 			detLaPlace=laPlace();
 			return detLaPlace;
-		}
+		
 	}
 	private int laPlace()
 	{

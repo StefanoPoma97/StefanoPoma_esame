@@ -9,36 +9,65 @@ public class TensorNode {
 	private ArrayList<Matrice> matrici= new ArrayList<>();
 	private boolean root=false;
 	
+	/**
+	 * 
+	 * @param _id id Stringa
+	 */
 	public void setId(String _id)
 	{
 		id=_id;
 	}
-	
+	/**
+	 * 
+	 * @return array di Tensor
+	 */
 	public ArrayList<Tensor> getTensori ()
 	{
 		return tensori;
 	}
+	/**
+	 * setta se il nodo è la radice
+	 */
 	public void setRoot()
 	{
 		root=true;
 	}
-	
+	/**
+	 * 
+	 * @param a Matrice
+	 */
 	public void addMatrice (Matrice a)
 	{
 		matrici.add(a);
 	}
+	/**
+	 * 
+	 * @param a Tensor
+	 */
 	public void addTensor(Tensor a)
 	{
 		tensori.add(a);
 	}
+	/**
+	 * 
+	 * @param a ArrayList di Tensor
+	 */
 	public void addTensori(ArrayList<Tensor>a)
 	{
 		tensori=new ArrayList<>(a);
 	}
+	/**
+	 * 
+	 * @param a TensorNode
+	 */
 	public void addNode(TensorNode a)
 	{
 		nodi.add(a);
 	}
+	/**
+	 * 
+	 * @param a ArrayList di TensorNode
+	 */
 	public void addNodi(ArrayList<TensorNode>a)
 	{
 		nodi=new ArrayList<>(a);
@@ -163,7 +192,10 @@ public class TensorNode {
 		}
 		return min;
 	}
-	
+	/**
+	 * restituisce il tensorUnit, ovvero il massimo se si tratta di un nodo qualsiasi, e il minimo se si tratta del nodo radice
+	 * @return tensorUnit
+	 */
 	public int tensorUnit()
 	{
 		int output;

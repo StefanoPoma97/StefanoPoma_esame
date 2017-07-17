@@ -33,7 +33,10 @@ public class XmlParser {
 		TensorNode tmp=new TensorNode();
 		boolean root=true;
 		boolean primaRigaMatrice=true;
+		boolean nodoPadre=false;
+		boolean nodoFiglio=false;
 		int cont=0;
+		boolean e =false;
 		int x=0;
 		int y=0;
 		int matrice [][]=new int [5][5];
@@ -62,6 +65,10 @@ public class XmlParser {
 										break;
 									case "TensorNode":
 										open++;
+										if (nodoPadre==true)
+											nodoFiglio=true;
+										if (open>1)
+											nodoPadre=true;
 										cont=0;
 										tmp=new TensorNode();
 										
@@ -140,33 +147,44 @@ public class XmlParser {
 									case "label":
 										tmp.setId(label);
 										System.out.println("inizio nodo"+label);
+										if (label.equalsIgnoreCase("E"))
+											e=true;
 										break;
 									case "matrix":
 										matrici.add(new Matrice(matrice));
 										break;
 									case "tensor":
 										cont++;
+										if (cont==15 && e==true)
+											System.out.println("quasi");
+											
 										System.out.println("sto per aggiunger tensor numero: "+cont);
 										tensori.add(new Tensor(matrici));
 										matrici=new ArrayList<>();
 										break;
 										
 									case "TensorNode":
-										if (open >1)
+										open--;
+										if (open==0)
+											nodoPadre=false;
+										if (open ==1)
+										{
+											tmp.addNodi(nodiAdd);
+											nodiAdd=new ArrayList<>();
+											output.add(tmp);
+											tensori=new ArrayList<>();
+											tmp=null;
+										}
+										
+										else if (tensori.size()!=0)
 										{
 											tmp.addTensori(tensori);
 											nodiAdd.add(tmp);
 											tmp=null;
 											tensori=new ArrayList<>();
 										}
-										else
-										{
-											tmp.addNodi(nodiAdd);
-											nodiAdd=null;
-											output.add(tmp);
-											tmp=null;
-										}
-										open--;
+										
+										
 										break;
 									}
 									
